@@ -27,11 +27,7 @@ CREATE TABLE IF NOT EXISTS `fa_warehouse`(
    PRIMARY KEY ( `wh_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO fa_warehouse(wh_name,wh_spec,wh_typ,wh_belonging,wh_number,wh_unit,wh_requisitioner,wh_sort,wh_contract,wh_supplier,wh_notes,wh_asset_belongs,wh_indate,wh_document_id)
-                       VALUES
-                       ('光电探测器','Si AMPLIFIED DETECTOR 320-1000nm','PDA8A/M','超净间库房4号房','2','台','李思远','原材料','4209722221-1','THORLABS','用于510稳频系统安装','法拉第','2019-5-15','1'),
-                       ('光学平台','无','GOT1224','超净间库房4号房','1','台','李思远','固定资产','q23997e44567','北京华维浩润仪器有限公司','无','中心','2019-7-07','2'),
-                       ('手持频谱仪','无','N9935A','超净间库房4号房','1','台','柯一睿','固定资产','556333332','KEYSIGHT','无','中心','2019-8-12','3');
+
 /*
 技术文档
 文档编号 文档定位 文档描述
@@ -79,6 +75,12 @@ INSERT INTO fa_document(dm_location,dm_notes)
                        ('2011230892323','法拉第激光头技术文档'),
                        ('23498660982','光学平台说明书'),
                        ('777784444','手持频谱仪说明书');
+                       
+INSERT INTO fa_warehouse(wh_name,wh_spec,wh_typ,wh_belonging,wh_number,wh_unit,wh_requisitioner,wh_sort,wh_contract,wh_supplier,wh_notes,wh_asset_belongs,wh_indate,wh_document_id)
+                       VALUES
+                       ('光电探测器','Si AMPLIFIED DETECTOR 320-1000nm','PDA8A/M','超净间库房4号房','2','台','李思远','原材料','4209722221-1','THORLABS','用于510稳频系统安装','法拉第','2019-5-15','1'),
+                       ('光学平台','无','GOT1224','超净间库房4号房','1','台','李思远','固定资产','q23997e44567','北京华维浩润仪器有限公司','无','中心','2019-7-07','2'),
+                       ('手持频谱仪','无','N9935A','超净间库房4号房','1','台','柯一睿','固定资产','556333332','KEYSIGHT','无','中心','2019-8-12','3');
 
 INSERT INTO fa_fixed_assets(fa_fixed_assets_wh_id,fa_fixed_assets_number)
                        VALUES
