@@ -176,7 +176,7 @@ REFERENCES Warehouse(whse_id);
 
 /*入库记录关合同*/
 ALTER TABLE GodownEntry
-ADD FOREIGN KEY (gden_whse_con_id)
+ADD FOREIGN KEY (gden_con_id)
 REFERENCES Contract(con_id);
 
 /*领料数量关联领料单号*/
