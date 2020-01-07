@@ -80,13 +80,14 @@ CREATE TABLE IF NOT EXISTS `Warehouse`(
 
 /*
 合同表
-编号 合同号 总金额 资产所属 申购人 采购员 签订日期
+编号 合同号 总金额 资产所属 供应商 申购人 采购员 签订日期
 */
 CREATE TABLE IF NOT EXISTS `Contract`(
 	`con_id` MEDIUMINT UNSIGNED AUTO_INCREMENT NOT NULL,
 	`con_no` VARCHAR(20) NOT NULL,
 	`con_price` FlOAT(10,3) UNSIGNED NOT NULL,
 	`con_belongs` VARCHAR(20) NOT NULL,
+    `con_supplier` VARCHAR(20) NOT NULL,
 	`con_requester_id` SMALLINT UNSIGNED NOT NULL,
 	`con_buyer` SMALLINT UNSIGNED NOT NULL,
 	`con_date` DATE NOT NULL,
@@ -121,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `GetRecordsNum`(
 
 /*
 领料单号 
-编号 出库单号 项目代码编号 领料仓库 领料人 库管员
+编号 出库单号 项目代码编号 领料仓库 领料人 库管员 领料日期
 */
 CREATE TABLE IF NOT EXISTS `GetRecords`(
 	`getr_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -130,6 +131,7 @@ CREATE TABLE IF NOT EXISTS `GetRecords`(
 	`getr_whse_id` SMALLINT UNSIGNED NOT NULL,
 	`getr_recipient_id` SMALLINT UNSIGNED NOT NULL,
 	`getr_whse_keeper_id` SMALLINT UNSIGNED NOT NULL,
+    `getr_out_date` DATE NOT NULL,
    PRIMARY KEY ( `getr_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
