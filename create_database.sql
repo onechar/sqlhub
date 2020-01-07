@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `GodownEntry`(
 	`gden_con_id` MEDIUMINT UNSIGNED NOT NULL,
 	`gden_whse_keeper_id` SMALLINT UNSIGNED NOT NULL,
     `gden_in_date` DATE NOT NULL,
+    `gden_state` varchar(4) NOT NULL,
    PRIMARY KEY (`gden_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
