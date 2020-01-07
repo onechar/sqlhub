@@ -51,14 +51,14 @@ INSERT INTO Contract(con_no,con_price,con_belongs,con_supplier,con_requester_id,
                        ('XCHY20190423','2100','法拉第','上海紫莓仪器有限公司','4','6','2019-09-18'),
                        ('CHQ135711','126999.23','法拉第','索雷博光电科技(上海)有限公司','1','6','2019-12-25');
 
-INSERT INTO GodownEntry(gden_number,gden_whse_id,gden_con_id,gden_whse_keeper_id,gden_in_date)
+INSERT INTO GodownEntry(gden_number,gden_whse_id,gden_con_id,gden_whse_keeper_id,gden_in_date,gden_state)
                        VALUES
-                       ('123-972353','1','1','1','2019-06-07'),
-                       ('274-435907','1','2','1','2019-08-12'),
-                       ('384-123895','1','3','1','2019-11-07'),
-                       ('901-237234','3','4','1','2019-12-12'),
-                       ('490-324890','3','5','1','2019-02-18'),
-                       ('923-423490','2','6','1','2019-03-23');
+                       ('123-972353','1','1','1','2019-06-07','已完结'),
+                       ('274-435907','1','2','1','2019-08-12','未完结'),
+                       ('384-123895','1','3','1','2019-11-07','未完结'),
+                       ('901-237234','3','4','1','2019-12-12','已完结'),
+                       ('490-324890','3','5','1','2019-02-18','已完结'),
+                       ('923-423490','2','6','1','2019-03-23','已完结');
 
 
 INSERT INTO Materials(mat_gden_id,mat_code_id,mat_purchase,mat_received,mat_con_price,mat_fd_price,mat_notes,mat_in_date,mat_arrive_date)
