@@ -42,14 +42,14 @@ INSERT INTO Project(project_code)
                        ('TAPD190912'),
                        ('TAIF191112');
 
-INSERT INTO Contract(con_no,con_price,con_belongs,con_requester_id,con_buyer,con_date)
+INSERT INTO Contract(con_no,con_price,con_belongs,con_supplier,con_requester_id,con_buyer,con_date)
                        VALUES
-                       ('JAHD190422','7300','法拉第','1','6','2019-11-12'),
-                       ('HKSKP19042205','4200','法拉第','4','6','2019-11-23'),
-                       ('QH-190425-33','23000.32','法拉第','1','6','2019-09-23'),
-                       ('RSCE2019012311','6800','中心','2','6','2019-07-26'),
-                       ('XCHY20190423','2100','法拉第','4','6','2019-09-18'),
-                       ('CHQ135711','126999.23','法拉第','1','6','2019-12-25');
+                       ('JAHD190422','7300','法拉第','索雷博光电科技(上海)有限公司','1','6','2019-11-12'),
+                       ('HKSKP19042205','4200','法拉第','索雷博光电科技(上海)有限公司','4','6','2019-11-23'),
+                       ('QH-190425-33','23000.32','法拉第','青岛森泉光电有限公司','1','6','2019-09-23'),
+                       ('RSCE2019012311','6800','中心','青岛森泉光电有限公司','2','6','2019-07-26'),
+                       ('XCHY20190423','2100','法拉第','上海紫莓仪器有限公司','4','6','2019-09-18'),
+                       ('CHQ135711','126999.23','法拉第','索雷博光电科技(上海)有限公司','1','6','2019-12-25');
 
 INSERT INTO GodownEntry(gden_number,gden_whse_id,gden_con_id,gden_whse_keeper_id,gden_in_date)
                        VALUES
@@ -83,12 +83,12 @@ INSERT INTO Materials(mat_gden_id,mat_code_id,mat_purchase,mat_received,mat_con_
                        ('6','5','0','0','9530','8820','无','1000-01-01','1000-01-01');
 
 
-INSERT INTO GetRecords(getr_number,getr_project_id,getr_whse_id,getr_recipient_id,getr_whse_keeper_id)
+INSERT INTO GetRecords(getr_number,getr_project_id,getr_whse_id,getr_recipient_id,getr_whse_keeper_id,GetRecords)
                        VALUES
-                       ('234234-231','2','1','4','1'),
-                       ('752451-523','3','1','4','1'),
-                       ('498234-632','1','1','2','1'),
-                       ('512351-583','2','1','2','1');
+                       ('234234-231','2','1','4','1','2019-12-03'),
+                       ('752451-523','3','1','4','1','2019-06-23'),
+                       ('498234-632','1','1','2','1','2019-08-12'),
+                       ('512351-583','2','1','2','1','2019-04-18');
 
 INSERT INTO GetRecordsNum(getr_mat_code_id,getr_num_out_number,getr_id)
                        VALUES
