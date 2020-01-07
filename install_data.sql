@@ -83,7 +83,7 @@ INSERT INTO Materials(mat_gden_id,mat_code_id,mat_purchase,mat_received,mat_con_
                        ('6','5','0','0','9530','8820','无','1000-01-01','1000-01-01');
 
 
-INSERT INTO GetRecords(getr_number,getr_project_id,getr_whse_id,getr_recipient_id,getr_whse_keeper_id,GetRecords)
+INSERT INTO GetRecords(getr_number,getr_project_id,getr_whse_id,getr_recipient_id,getr_whse_keeper_id,getr_out_date)
                        VALUES
                        ('234234-231','2','1','4','1','2019-12-03'),
                        ('752451-523','3','1','4','1','2019-06-23'),
