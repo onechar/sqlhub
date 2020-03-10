@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `Inventory`(
 */
 CREATE TABLE IF NOT EXISTS `GodownEntry`(
 	`gden_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`gden_numbergetrecordsnum` VARCHAR(12) NOT NULL,
+	`gden_number` VARCHAR(12) NOT NULL,
 	`gden_whse_id` SMALLINT UNSIGNED NOT NULL,
 	`gden_con_id` MEDIUMINT UNSIGNED NOT NULL,
 	`gden_whse_keeper_id` SMALLINT UNSIGNED NOT NULL,
