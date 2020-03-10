@@ -19,7 +19,7 @@ INSERT INTO MaterialsSort(mat_sort_name,mat_sort_pid)
                         ('小型化原子泡机械部件','2');
                         
                        
-INSERT INTO MaterialsCode(mat_code_number,mat_code_name,mat_code_spec,mat_code_models,mat_code_unit,mat_code_brand,mat_code_sort,mat_code_notes)
+INSERT INTO MaterialsCode(mat_code_number,mat_code_name,mat_code_spec,mat_code_models,mat_code_unit,mat_code_brand,mat_code_sort_id,mat_code_notes)
                        VALUES
                        ('129734758','混频器','无','ZFM-2-S+','个','索雷博','3','无'),
                        ('148634723','隔离器','无','IO-5-850-VLP','个','淘宝旗舰店','4','无'),
