@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `GodownItems`(
 	`gdit_number` INT UNSIGNED NOT NULL,
 	`gdit_notes` SMALLINT UNSIGNED NOT NULL,
 	`gdit_arrival_time` SMALLINT UNSIGNED NOT NULL,
-    `gdit_mat_id` SMALLINT UNSIGNED NOT NULL,
+    `gdit_mat_id` INT UNSIGNED NOT NULL,
    PRIMARY KEY (`gdit_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -330,133 +330,133 @@ CREATE TABLE IF NOT EXISTS `Staff`(
 
 /*------------------------------ 主外键约束 ----------------------------------------------*/
 
-/*采购项目关联资产所属*/
+/*采购项目   rv  资产所属*/
 ALTER TABLE ProcProject
 ADD FOREIGN KEY (proc_belongs_id)
 REFERENCES Belongs(belongs_id);
 
-/*采购项目关联申请人*/
+/*采购项目   rv  申请人*/
 ALTER TABLE ProcProject
 ADD FOREIGN KEY (proc_requester_id)
 REFERENCES Staff(staff_id);
 
-/*售后表单关联原材料物品*/
+/*库存表   rv  仓库表*/
 ALTER TABLE Inventory
 ADD FOREIGN KEY (invt_whse_id)
 REFERENCES Warehouse(whse_id);
 
-/*售后表单关联原材料物品*/
-ALTER TABLE ProcProject
-ADD FOREIGN KEY (proc_buyer)
+/*售后表单   rv  原材料物品*/
+ALTER TABLE AgainForm
+ADD FOREIGN KEY (af_mat_id)
 REFERENCES Material(mat_id);
 
-/*售后表单关联原材料物品*/
+/*原材料编码   rv  原材料类别*/
 ALTER TABLE MaterialsCode
 ADD FOREIGN KEY (mat_code_sort_id)
 REFERENCES MaterialsSort(mat_sort_id);
 
-/*采购项目关联采购员*/
+/*采购项目   rv  采购员*/
 ALTER TABLE ProcProject
 ADD FOREIGN KEY (proc_buyer)
 REFERENCES Staff(staff_id);
 
-/*合同表关联人员表*/
+/*合同表   rv  人员表*/
 ALTER TABLE ContractForm
 ADD FOREIGN KEY (con_requester_id)
 REFERENCES Staff(staff_id);
 
-/*合同表关联人员表*/
+/*合同表   rv  人员表*/
 ALTER TABLE ContractForm
 ADD FOREIGN KEY (con_buyer)
 REFERENCES Staff(staff_id);
 
-/*合同表关联供应商*/
+/*合同表   rv  供应商*/
 ALTER TABLE ContractForm
 ADD FOREIGN KEY (con_supplier_id)
 REFERENCES Supplier(spl_id);
 
-/*领料数量关联项目代码*/
+/*领料数量   rv  项目代码*/
 ALTER TABLE GetRecords
 ADD FOREIGN KEY (getr_project_id)
 REFERENCES ProdProject(prod_proj_id);
 
-/*领料数量关联仓库*/
+/*领料数量   rv  仓库*/
 ALTER TABLE GetRecords
 ADD FOREIGN KEY (getr_whse_id)
 REFERENCES Warehouse(whse_id);
 
-/*领料数量关联人员*/
+/*领料数量   rv  人员*/
 ALTER TABLE GetRecords
 ADD FOREIGN KEY (getr_recipient_id)
 REFERENCES Staff(staff_id);
 
-/*领料数量关联人员*/
+/*领料数量   rv  人员*/
 ALTER TABLE GetRecords
 ADD FOREIGN KEY (getr_whse_keeper_id)
 REFERENCES Staff(staff_id);
 
-/*领料数量关联原材料编码*/
+/*领料数量   rv  原材料编码*/
 ALTER TABLE GetRecordsNum
 ADD FOREIGN KEY (getr_mat_code_id)
 REFERENCES MaterialsCode(mat_code_id);
 
-/*领料数量关联出库单号*/
+/*领料数量   rv  出库单号*/
 ALTER TABLE GetRecordsNum
 ADD FOREIGN KEY (getr_id)
 REFERENCES GetRecords(getr_id);
 
 
-/*入库记录关联仓库*/
+/*入库记录   rv  仓库*/
 ALTER TABLE GodownEntry
 ADD FOREIGN KEY (gden_whse_id)
 REFERENCES Warehouse(whse_id);
 
-/*售后表单关联原材料物品*/
+/*售后表单   rv  原材料物品*/
 ALTER TABLE AgainForm
 ADD FOREIGN KEY (af_mat_id)
 REFERENCES Material(mat_id);
 
-/*入库记录关联人员*/
+/*入库记录   rv  人员*/
 ALTER TABLE GodownEntry
 ADD FOREIGN KEY (gden_whse_keeper_id)
 REFERENCES Staff(staff_id);
 
-/*售后表单关联原材料物品*/
+/*售后表单   rv  原材料物品*/
 ALTER TABLE GodownItems
 ADD FOREIGN KEY (gdit_mat_id)
 REFERENCES Material(mat_id);
 
-/*原材料订单关联采购项目*/
+/*原材料订单   rv  采购项目*/
 ALTER TABLE LabTool
 ADD FOREIGN KEY (lab_tool_proc_id)
 REFERENCES ProcProject(proc_id);
 
-/*原材料物品关联状态*/
+/*原材料物品   rv  状态*/
 ALTER TABLE LabConsumable
 ADD FOREIGN KEY (lab_tool_state_id)
 REFERENCES ItemState(lab_tool_state);
 
-/*原材料订单关联采购项目*/
+/*原材料订单   rv  采购项目*/
 ALTER TABLE LabConsumable
 ADD FOREIGN KEY (lab_csb_proc_id)
 REFERENCES ProcProject(proc_id);
 
-/*原材料物品关联状态*/
+/*原材料物品   rv  状态*/
 ALTER TABLE LabConsumable
 ADD FOREIGN KEY (lab_csb_state_id)
 REFERENCES ItemState(item_state_id);
 
-/*原材料订单关联采购项目*/
+/*原材料订单   rv  采购项目*/
 ALTER TABLE MaterialForm
 ADD FOREIGN KEY (mat_form_proc_id)
 REFERENCES ProcProject(proc_id);
 
-/*原材料物品关联状态*/
+/*原材料物品   rv  状态*/
 ALTER TABLE Material
 ADD FOREIGN KEY (mat_state_id)
 REFERENCES ItemState(item_state_id);
 
-/*原材料设备关联原材料物品*/
+/*原材料设备   rv  原材料物品*/
 ALTER TABLE MaterialEqpt
 ADD FOREIGN KEY (mat_id)
 REFERENCES Material(mat_id);
