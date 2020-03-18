@@ -434,7 +434,7 @@ REFERENCES ProcProject(proc_id);
 /*工具表   rv  状态*/
 ALTER TABLE LabTool
 ADD FOREIGN KEY (lab_tool_state_id)
-REFERENCES ItemState(lab_tool_state);
+REFERENCES ItemState(item_state_id);
 
 /*耗材   rv  采购项目*/
 ALTER TABLE LabConsumable
