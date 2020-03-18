@@ -431,17 +431,17 @@ ALTER TABLE LabTool
 ADD FOREIGN KEY (lab_tool_proc_id)
 REFERENCES ProcProject(proc_id);
 
-/*原材料物品   rv  状态*/
-ALTER TABLE LabConsumable
+/*工具表   rv  状态*/
+ALTER TABLE LabTool
 ADD FOREIGN KEY (lab_tool_state_id)
 REFERENCES ItemState(lab_tool_state);
 
-/*原材料订单   rv  采购项目*/
+/*耗材   rv  采购项目*/
 ALTER TABLE LabConsumable
 ADD FOREIGN KEY (lab_csb_proc_id)
 REFERENCES ProcProject(proc_id);
 
-/*原材料物品   rv  状态*/
+/*耗材   rv  状态*/
 ALTER TABLE LabConsumable
 ADD FOREIGN KEY (lab_csb_state_id)
 REFERENCES ItemState(item_state_id);
