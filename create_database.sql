@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `ProdProject`(
 	`prod_proj_number` VARCHAR(12) NOT NULL,
     `prod_proj_begin_date` DATE,
     `prod_proj_end_date` DATE,
-   PRIMARY KEY ( `project_id` )
+   PRIMARY KEY ( `prod_proj_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -264,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `MaterialForm`(
 */
 CREATE TABLE IF NOT EXISTS `LabConsumable`(
 	`lab_csb_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`lab_csb_name` VARCHAR(8) AUTO_INCREMENT NOT NULL,
+	`lab_csb_name` VARCHAR(10) NOT NULL,
 	`lab_csb_model` VARCHAR(20) NOT NULL,
     `lab_csb_number` SMALLINT NOT NULL,
     `lab_csb_unit` VARCHAR(4) NOT NULL,
@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `LabConsumable`(
 */
 CREATE TABLE IF NOT EXISTS `LabTool`(
 	`lab_tool_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`lab_tool_name` VARCHAR(8) AUTO_INCREMENT NOT NULL,
+	`lab_tool_name` VARCHAR(10) NOT NULL,
 	`lab_tool_model` VARCHAR(20) NOT NULL,
     `lab_tool_number` SMALLINT NOT NULL,
     `lab_tool_unit` VARCHAR(4) NOT NULL,
