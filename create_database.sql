@@ -50,9 +50,10 @@ CREATE TABLE IF NOT EXISTS `AgainForm`(
 	`af_id` MEDIUMINT UNSIGNED AUTO_INCREMENT NOT NULL,
 	`af_number` VARCHAR(18) NOT NULL,
     `af_date` DATE NOT NULL,
-    `af_number` VARCHAR(18) NOT NULL,
+    `af_mat_id` INT UNSIGNED NOT NULL,
    PRIMARY KEY ( `af_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 
@@ -409,6 +410,11 @@ REFERENCES GetRecords(getr_id);
 ALTER TABLE GodownEntry
 ADD FOREIGN KEY (gden_whse_id)
 REFERENCES Warehouse(whse_id);
+
+/*售后表单关联原材料物品*/
+ALTER TABLE AgainForm
+ADD FOREIGN KEY (af_mat_id)
+REFERENCES Material(mat_id);
 
 /*入库记录关联人员*/
 ALTER TABLE GodownEntry
