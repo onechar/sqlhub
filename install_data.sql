@@ -92,7 +92,7 @@ INSERT INTO MaterialForm(mat_form_supplier_id,mat_form_buy_date,mat_form_proc_id
                         ('2','2018-12-08','5'),
                         ('3','2018-12-09','1');
 
-INSERT INTO Materials(mat_code_id,mat_quantity,mat_price,mat_state_id,mat_notes,mat_item_id)
+INSERT INTO Material(mat_code_id,mat_quantity,mat_price,mat_state_id,mat_notes,mat_item_id)
                        VALUES
                        ('1','2','4000.3','1','无','1'),
                        ('1','2','5230','1','无','1'),
