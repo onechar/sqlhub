@@ -1,426 +1,153 @@
-/*
-创建数据库
-*/
-CREATE DATABASE IF NOT EXISTS faradaylaser;
 use faradaylaser;
-set names utf8;
+INSERT INTO Supplier(spl_name)
+					 VALUES
+                     ('索雷博光电科技有限公司'),
+                     ('大恒光电科技有限公司'),
+                     ('垂天科技有限公司');
 
-#  ------------------------------------------------------------------------------  采购模块
-/*
-采购项目
-编号 采购单号 立项时间 资产所属 申请人 采购员
-*/
-CREATE TABLE IF NOT EXISTS `ProcProject`(
-	`proc_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`proc_number` VARCHAR(20) NOT NULL,
-	`proc_build_date` DATE NOT NULL,
-    `proc_end_date` DATE NOT NULL,
-	`proc_requester_id` SMALLINT UNSIGNED NOT NULL,
-	`proc_buyer` SMALLINT UNSIGNED NOT NULL,
-   PRIMARY KEY ( `proc_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO Staff(staff_name,staff_gender,staff_phone)
+                       VALUES
+                       ('陈昆昆','男','0000'),
+                       ('吴晗坤','男','0000'),
+                       ('王小博','男','0000'),
+                       ('柯一睿','男','0000'),
+                       ('樊馨丹','女','0000'),
+                       ('吴晶','女','0000'),
+                       ('黄美秀','男','0000'),
+                       ('李琳琳','女','0000'),
+                       ('李晓霞','女','0000'),
+                       ('金瑶','女','0000'),
+                       ('李敦庆','女','0000'),
+                       ('李思远','男','0000'),
+                       ('周海慧','女','0000'),
+                       ('陈景标','男','0000'); 
+                     
 
-/*
-供应商
-编号 供应商名称
-*/
-CREATE TABLE IF NOT EXISTS `Supplier`(
-	`spl_id` MEDIUMINT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`spl_name` VARCHAR(18) NOT NULL,
-   PRIMARY KEY ( `spl_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO Warehouse(whse_name,whse_home)
+                       VALUES
+                       ('超净间四号库房','温州'),
+                       ('五号教学楼','北京'),
+                       ('研发办公室B储物间','温州');
+                       
+INSERT INTO MaterialsSort(mat_sort_name,mat_sort_pid)
+						VALUES
+                        ('光学','0'),
+                        ('机械','0'),
+                        ('电路','0'),
+                        ('镜架类','1'),
+                        ('镜片类','1'),
+                        ('激光管','1'),
+                        ('隔离器','1'),
+                        ('电光调制器（EOM）','1'),
+                        ('小型化机箱','2'),
+                        ('小型化原子泡机械部件','2');
+                        
+                       
+INSERT INTO MaterialsCode(mat_code_number,mat_code_name,mat_code_spec,mat_code_model,mat_code_unit,mat_code_brand,mat_code_sort_id,mat_code_notes)
+                       VALUES
+                       ('129734758','混频器','无','ZFM-2-S+','个','索雷博','3','无'),
+                       ('148634723','隔离器','无','IO-5-850-VLP','个','淘宝旗舰店','4','无'),
+                       ('109237568','平凹透镜','852 D12.7 f=25.4','无','片','大恒光电','5','无'),
+                       ('132807456','平凸透镜','852 D12.7 f=38.1','无','片','超达','6','无'),
+                       ('123097534','光卡','无','VRC2','个','北京大学','7','无'),
+                       ('121397543','扩束镜1','无','GBE05-B','个','光电','4','无'),
+                       ('121397544','扩束镜2','无','BE052-B','个','三明誉洁','4','无'),
+                       ('123098234','EOM','无','PM7-NIR-L61301','个','Qubig','5','无');
+                       
 
-/*
-售后表单
-编号 售后单号 立项时间 所属采购物品
-*/
-CREATE TABLE IF NOT EXISTS `AgainForm`(
-	`af_id` MEDIUMINT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`af_number` VARCHAR(18) NOT NULL,
-    `af_date` DATE NOT NULL,
-    `af_mat_id` INT UNSIGNED NOT NULL,
-   PRIMARY KEY ( `af_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO ProdProject(prod_proj_number,prod_proj_begin_date,prod_proj_end_date)
+                       VALUES
+                       ('TAIF190824','2018-11-23','2018-11-23'),
+                       ('TAMST19113','2019-08-23','2018-11-25'),
+                       ('TAIF190921','2018-04-21','2018-11-26'),
+                       ('TAIF191012','2018-11-25','1000-01-01'),
+                       ('TAPD190912','2018-05-13','1000-01-01'),
+                       ('TAIF191112','2018-09-23','1000-01-01'),
+                       ('FGEQ191234','2017-09-23','1000-01-01'),
+                       ('TYIF196781','2019-09-23','2019-05-26');
+	
+INSERT INTO ProcProject(proc_number,proc_build_date,proc_end_date,proc_requester_id,proc_buyer)
+						VALUES
+                        ('FAEIU00001','2018-11-25','2018-12-05','1','2'),
+                        ('FAER00002','2019-11-25','2018-12-05','1','2'),
+                        ('FATY00003','2019-11-25','1000-01-01','2','2'),
+                        ('ZXTE00004','2020-2-17','1000-01-01','2','2'),
+                        ('ZXKD00005','2020-3-12','2020-3-19','2','2');
+                        
+INSERT INTO ItemState(item_state_name)
+						VALUES
+                        ('未购买'),
+                        ('已购买'),
+                        ('已到货'),
+                        ('已入库'),
+                        ('待检测'),
+                        ('检测未通过');
 
-#  ------------------------------------------------------------------------------  原材料信息模块
+INSERT INTO MaterialForm(mat_form_supplier_id,mat_form_buy_date,mat_form_proc_id)
+						VALUES
+                        ('1','2018-12-05','1'),
+                        ('2','2018-11-05','2'),
+                        ('3','2018-12-06','3'),
+                        ('1','2018-12-07','4'),
+                        ('2','2018-12-08','5'),
+                        ('3','2018-12-09','1');
 
-/*
-原材料编码
-编号 原材料编号 物品名称 规格 型号 品牌 单位 类别 备注
-*/
-CREATE TABLE IF NOT EXISTS `MaterialsCode`(
-	`mat_code_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`mat_code_number` VARCHAR(12) NOT NULL,
-	`mat_code_name` VARCHAR(15) NOT NULL,
-	`mat_code_spec` VARCHAR(20) NOT NULL,
-	`mat_code_model` VARCHAR(20) NOT NULL,
-	`mat_code_brand` VARCHAR(10) NOT NULL,
-	`mat_code_unit` VARCHAR(4) NOT NULL,
-	`mat_code_sort_id` SMALLINT UNSIGNED NOT NULL,
-	`mat_code_notes` VARCHAR(30) NOT NULL,
-   PRIMARY KEY (`mat_code_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO Material(mat_code_id,mat_quantity,mat_price,mat_state_id,mat_notes,mat_item_id)
+                       VALUES
+                       ('1','2','4000.3','1','无','1'),
+                       ('1','2','5230','1','无','1'),
+                       ('1','2','12000','1','无','1'),
+                       ('2','5','430','2','检测出异常等待售后处理','2'),
+                       ('2','6','7694','2','到货一半剩下货物延迟到货','2'),
+                       ('2','4','3200','2','无','2'),
+                       ('3','5','3874','2','无','2'),
+                       ('3','3','12397.23','3','无','3'),
+                       ('4','4','42873','3','延期发货','3'),
+                       ('4','3','28394','4','无','4'),
+                       ('4','2','200','4','无','4'),
+                       ('7','2','7600','3','无','3'),
+                       ('8','2','34000','3','无','3'),
+                       ('5','4','980','4','无','4'),
+                       ('5','6','9000','4','无','4'),
+                       ('6','5','2350','2','无','2'),
+                       ('6','4','120','3','无','3'),
+                       ('6','6','9530','1','无','1');
+                       
 
-/*
-原材料类别
-*/
-CREATE TABLE IF NOT EXISTS `MaterialsSort`(
-	`mat_sort_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-    `mat_sort_name` VARCHAR(12) NOT NULL,
-    `mat_sort_pid` SMALLINT UNSIGNED NOT NULL,
-   PRIMARY KEY (`mat_sort_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO ContractForm(con_no,con_price,con_supplier_id,con_date,con_proc_id)
+                       VALUES
+                       ('JAHD190422','7300','1','2019-11-12','1'),
+                       ('HKSKP19042205','4200','1','2019-11-23','2'),
+                       ('QH-190425-33','23000.32','2','2019-09-23','3'),
+                       ('RSCE2019012311','6800','2','2019-07-26','4'),
+                       ('XCHY20190423','2100','3','2019-09-18','5'),
+                       ('CHQ135711','126999.23','3','2019-12-25','2');
+                       
+INSERT INTO MaterialEqpt(mat_eqpt_serial,mat_id)
+						VALUES
+                        ('ER34564734','13');
 
-#  ------------------------------------------------------------------------------  库存记录
-
-/*
-库存数量表
-编号 原材料编码 数量 所属仓库
-*/
-CREATE TABLE IF NOT EXISTS `Inventory`(
-	`invt_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`invt_code_id` INT UNSIGNED NOT NULL,
-	`invt_number` SMALLINT UNSIGNED NOT NULL,
-	`invt_whse_id` SMALLINT UNSIGNED NOT NULL,
-   PRIMARY KEY (`invt_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-入库物品信息
-编号 所属入库单号 备注 到货日期 所属物品
-*/
-CREATE TABLE IF NOT EXISTS `GodownItems`(
-	`gdit_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`gdit_number` INT UNSIGNED NOT NULL,
-	`gdit_notes` SMALLINT UNSIGNED NOT NULL,
-	`gdit_arrival_time` SMALLINT UNSIGNED NOT NULL,
-    `gdit_mat_id` INT UNSIGNED NOT NULL,
-   PRIMARY KEY (`gdit_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-入库单
-编号 入库单号 所属仓库 库管员 单号日期
-*/
-CREATE TABLE IF NOT EXISTS `GodownEntry`(
-	`gden_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`gden_number` VARCHAR(12) NOT NULL,
-	`gden_whse_id` SMALLINT UNSIGNED NOT NULL,
-	`gden_whse_keeper_id` SMALLINT UNSIGNED NOT NULL,
-    `gden_in_date` DATE NOT NULL,
-   PRIMARY KEY (`gden_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-仓库表
-编号 仓库名称 归属地
-*/
-CREATE TABLE IF NOT EXISTS `Warehouse`(
-	`whse_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`whse_name` VARCHAR(10) NOT NULL,
-	`whse_home` VARCHAR(3) NOT NULL,
-   PRIMARY KEY ( `whse_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-领料数量 
-编号 原材料编码 出库数量 出库单号
-*/
-CREATE TABLE IF NOT EXISTS `GetRecordsNum`(
-	`getr_num_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`getr_mat_code_id` INT UNSIGNED NOT NULL,
-	`getr_num_out_number` SMALLINT UNSIGNED NOT NULL,
-	`getr_id` INT UNSIGNED NOT NULL,
-   PRIMARY KEY ( `getr_num_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-领料单号 
-编号 出库单号 项目代码编号 领料仓库 领料人 库管员 类别 领料日期
-*/
-CREATE TABLE IF NOT EXISTS `GetRecords`(
-	`getr_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`getr_number` VARCHAR(12) NOT NULL,
-	`getr_project_id` INT UNSIGNED NOT NULL,
-	`getr_whse_id` SMALLINT UNSIGNED NOT NULL,
-	`getr_recipient_id` SMALLINT UNSIGNED NOT NULL,
-	`getr_whse_keeper_id` SMALLINT UNSIGNED NOT NULL,
-    `getr_sort` VARCHAR(5) NOT NULL,
-    `getr_out_date` DATE NOT NULL,
-   PRIMARY KEY ( `getr_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#  ------------------------------------------------------------------------------  产品模块
-
-/*
-产品项目表
-编号 项目代码 立项时间 完结时间
-*/
-CREATE TABLE IF NOT EXISTS `ProdProject`(
-	`prod_proj_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`prod_proj_number` VARCHAR(12) NOT NULL,
-    `prod_proj_begin_date` DATE NOT NULL,
-    `prod_proj_end_date` DATE NOT NULL,
-   PRIMARY KEY ( `prod_proj_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-产品表
-编号 产品名称 产品型号 库存数量
-*/
-CREATE TABLE IF NOT EXISTS `Product`(
-	`prod_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-    `prod_name` VARCHAR(12) NOT NULL,
-	`prod_model` VARCHAR(15) NOT NULL,
-    `prod_invt_number` SMALLINT NOT NULL,
-   PRIMARY KEY ( `prod_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO GodownEntry(gden_number,gden_whse_id,gden_whse_keeper_id,gden_in_date)
+                       VALUES
+                       ('123-972353','1','1','2019-06-07'),
+                       ('274-435907','1','1','2019-08-12'),
+                       ('384-123895','1','1','2019-11-07'),
+                       ('901-237234','3','1','2019-12-12'),
+                       ('490-324890','3','1','2019-02-18'),
+                       ('923-423490','2','1','2019-03-23'); 
 
 
-#  ------------------------------------------------------------------------------  库存物品信息
-/*
-物品状态表
-编号 状态
-*/
-CREATE TABLE IF NOT EXISTS `ItemState`(
-	`item_state_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`item_state_name` VARCHAR(12) NOT NULL,
-   PRIMARY KEY ( `item_state_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-原材料设备
-编号 序列号 所属物品
-*/
-CREATE TABLE IF NOT EXISTS `MaterialEqpt`(
-	`mat_eqpt_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`mat_eqpt_serial` VARCHAR(20) NOT NULL,
-    `mat_id` INT UNSIGNED NOT NULL,
-   PRIMARY KEY ( `mat_eqpt_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-原材料物品
-编号 原材料编码 数量 单价 状态 备注 所属订单
-*/
-CREATE TABLE IF NOT EXISTS `Material`(
-	`mat_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`mat_code_id` INT UNSIGNED NOT NULL,
-    `mat_quantity` SMALLINT NOT NULL,
-    `mat_price` FLOAT NOT NULL,
-    `mat_state_id` TINYINT UNSIGNED NOT NULL,
-    `mat_notes` VARCHAR(20) NOT NULL,
-    `mat_item_id` INT NOT NULL,
-   PRIMARY KEY ( `mat_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-/*
-原材料订单
-编号 供应商 购买时间 所属采购项目
-*/
-CREATE TABLE IF NOT EXISTS `MaterialForm`(
-	`mat_form_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`mat_form_supplier_id` MEDIUMINT UNSIGNED NOT NULL,
-    `mat_form_buy_date` DATE NOT NULL,
-    `mat_form_proc_id` INT UNSIGNED NOT NULL,
-   PRIMARY KEY ( `mat_form_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-/*
-实验室耗材表
-编号 物品名称 规格型号 数量 单位 状态 供应商 单价 所属采购项目
-*/
-CREATE TABLE IF NOT EXISTS `LabConsumable`(
-	`lab_csb_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`lab_csb_name` VARCHAR(10) NOT NULL,
-	`lab_csb_model` VARCHAR(20) NOT NULL,
-    `lab_csb_number` SMALLINT NOT NULL,
-    `lab_csb_unit` VARCHAR(4) NOT NULL,
-    `lab_csb_state_id` TINYINT UNSIGNED NOT NULL,
-    `lab_csb_supplier` VARCHAR(20) NOT NULL,
-    `lab_csb_price` FLOAT NOT NULL,
-    `lab_csb_proc_id` INT UNSIGNED NOT NULL,
-   PRIMARY KEY ( `lab_csb_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-实验室工具表
-编号 物品名称 规格型号 数量 单位 状态 供应商 单价 所属采购项目
-*/
-CREATE TABLE IF NOT EXISTS `LabTool`(
-	`lab_tool_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`lab_tool_name` VARCHAR(10) NOT NULL,
-	`lab_tool_model` VARCHAR(20) NOT NULL,
-    `lab_tool_number` SMALLINT NOT NULL,
-    `lab_tool_unit` VARCHAR(4) NOT NULL,
-    `lab_tool_state_id` TINYINT UNSIGNED NOT NULL,
-    `lab_tool_supplier` VARCHAR(20) NOT NULL,
-    `lab_tool_price` FLOAT NOT NULL,
-    `lab_tool_proc_id` INT UNSIGNED NOT NULL,
-   PRIMARY KEY ( `lab_tool_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-合同表
-编号 合同号 总金额 供应商 签订日期 所属采购项目
-*/
-CREATE TABLE IF NOT EXISTS `ContractForm`(
-	`con_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`con_no` VARCHAR(20) NOT NULL,
-	`con_price` FlOAT(10,3) UNSIGNED NOT NULL,
-    `con_supplier_id` MEDIUMINT UNSIGNED NOT NULL,
-	`con_date` DATE NOT NULL,
-    `con_proc_id` INT UNSIGNED NOT NULL,
-   PRIMARY KEY ( `con_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#  ------------------------------------------------------------------------------  其他信息
-
-/*
-人员表
-编号 姓名 性别 联系方式
-*/
-CREATE TABLE IF NOT EXISTS `Staff`(
-	`staff_id` SMALLINT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`staff_name` VARCHAR(4) NOT NULL,
-	`staff_gender` VARCHAR(1) NOT NULL,
-	`staff_phone` VARCHAR(11) NOT NULL,
-   PRIMARY KEY ( `staff_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-/*------------------------------ 主外键约束 ----------------------------------------------*/
-
-/*原材料订单   rv  供应商*/
-ALTER TABLE MaterialForm
-ADD FOREIGN KEY (mat_form_supplier_id)
-REFERENCES Supplier(spl_id);
-
-
-/*原材料物品   rv  原材料编码*/
-ALTER TABLE Material
-ADD FOREIGN KEY (mat_code_id)
-REFERENCES MaterialsCode(mat_code_id);
-
-/*采购项目   rv  申请人*/
-ALTER TABLE ProcProject
-ADD FOREIGN KEY (proc_requester_id)
-REFERENCES Staff(staff_id);
-
-/*库存表   rv  仓库表*/
-ALTER TABLE Inventory
-ADD FOREIGN KEY (invt_whse_id)
-REFERENCES Warehouse(whse_id);
-
-/*售后表单   rv  原材料物品*/
-ALTER TABLE AgainForm
-ADD FOREIGN KEY (af_mat_id)
-REFERENCES Material(mat_id);
-
-/*原材料编码   rv  原材料类别*/
-ALTER TABLE MaterialsCode
-ADD FOREIGN KEY (mat_code_sort_id)
-REFERENCES MaterialsSort(mat_sort_id);
-
-/*采购项目   rv  采购员*/
-ALTER TABLE ProcProject
-ADD FOREIGN KEY (proc_buyer)
-REFERENCES Staff(staff_id);
-
-/*合同表   rv  供应商*/
-ALTER TABLE ContractForm
-ADD FOREIGN KEY (con_supplier_id)
-REFERENCES Supplier(spl_id);
-
-/*领料数量   rv  项目代码*/
-ALTER TABLE GetRecords
-ADD FOREIGN KEY (getr_project_id)
-REFERENCES ProdProject(prod_proj_id);
-
-/*领料数量   rv  仓库*/
-ALTER TABLE GetRecords
-ADD FOREIGN KEY (getr_whse_id)
-REFERENCES Warehouse(whse_id);
-
-/*领料数量   rv  人员*/
-ALTER TABLE GetRecords
-ADD FOREIGN KEY (getr_recipient_id)
-REFERENCES Staff(staff_id);
-
-/*领料数量   rv  人员*/
-ALTER TABLE GetRecords
-ADD FOREIGN KEY (getr_whse_keeper_id)
-REFERENCES Staff(staff_id);
-
-/*领料数量   rv  原材料编码*/
-ALTER TABLE GetRecordsNum
-ADD FOREIGN KEY (getr_mat_code_id)
-REFERENCES MaterialsCode(mat_code_id);
-
-/*领料数量   rv  出库单号*/
-ALTER TABLE GetRecordsNum
-ADD FOREIGN KEY (getr_id)
-REFERENCES GetRecords(getr_id);
-
-
-/*入库记录   rv  仓库*/
-ALTER TABLE GodownEntry
-ADD FOREIGN KEY (gden_whse_id)
-REFERENCES Warehouse(whse_id);
-
-/*售后表单   rv  原材料物品*/
-ALTER TABLE AgainForm
-ADD FOREIGN KEY (af_mat_id)
-REFERENCES Material(mat_id);
-
-/*入库记录   rv  人员*/
-ALTER TABLE GodownEntry
-ADD FOREIGN KEY (gden_whse_keeper_id)
-REFERENCES Staff(staff_id);
-
-/*售后表单   rv  原材料物品*/
-ALTER TABLE GodownItems
-ADD FOREIGN KEY (gdit_mat_id)
-REFERENCES Material(mat_id);
-
-/*原材料订单   rv  采购项目*/
-ALTER TABLE LabTool
-ADD FOREIGN KEY (lab_tool_proc_id)
-REFERENCES ProcProject(proc_id);
-
-/*工具表   rv  状态*/
-ALTER TABLE LabTool
-ADD FOREIGN KEY (lab_tool_state_id)
-REFERENCES ItemState(item_state_id);
-
-/*耗材   rv  采购项目*/
-ALTER TABLE LabConsumable
-ADD FOREIGN KEY (lab_csb_proc_id)
-REFERENCES ProcProject(proc_id);
-
-/*合同表   rv  所属采购项目*/
-ALTER TABLE ContractForm
-ADD FOREIGN KEY (con_proc_id)
-REFERENCES ProcProject(proc_id);
-
-/*耗材   rv  状态*/
-ALTER TABLE LabConsumable
-ADD FOREIGN KEY (lab_csb_state_id)
-REFERENCES ItemState(item_state_id);
-
-/*原材料订单   rv  采购项目*/
-ALTER TABLE MaterialForm
-ADD FOREIGN KEY (mat_form_proc_id)
-REFERENCES ProcProject(proc_id);
-
-/*原材料物品   rv  状态*/
-ALTER TABLE Material
-ADD FOREIGN KEY (mat_state_id)
-REFERENCES ItemState(item_state_id);
-
-/*原材料设备   rv  原材料物品*/
-ALTER TABLE MaterialEqpt
-ADD FOREIGN KEY (mat_id)
-REFERENCES Material(mat_id);
+INSERT INTO Inventory(invt_code_id,invt_number,invt_whse_id)
+                       VALUES
+                       ('1','3','1'),
+                       ('2','5','1'),
+                       ('3','12','1'),
+                       ('4','23','1'),
+                       ('5','51','1'),
+                       ('6','15','1'),
+                       ('7','2','1'),
+                       ('8','3','1'),
+                       ('2','5','3'),
+                       ('3','6','3'),
+                       ('4','1','3'),
+                       ('5','2','3');
