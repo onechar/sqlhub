@@ -14,22 +14,11 @@ CREATE TABLE IF NOT EXISTS `ProcProject`(
 	`proc_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	`proc_number` VARCHAR(20) NOT NULL,
 	`proc_build_date` DATE NOT NULL,
-	`proc_belongs_id` TINYINT UNSIGNED NOT NULL,
+    `proc_end_date` DATE NOT NULL,
 	`proc_requester_id` SMALLINT UNSIGNED NOT NULL,
 	`proc_buyer` SMALLINT UNSIGNED NOT NULL,
    PRIMARY KEY ( `proc_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*
-资产所属
-编号 所属公司 
-*/
-CREATE TABLE IF NOT EXISTS `Belongs`(
-	`belongs_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`belongs_name` VARCHAR(20) NOT NULL,
-   PRIMARY KEY ( `belongs_id` )
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 /*
 供应商
@@ -40,7 +29,6 @@ CREATE TABLE IF NOT EXISTS `Supplier`(
 	`spl_name` VARCHAR(18) NOT NULL,
    PRIMARY KEY ( `spl_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 /*
 售后表单
@@ -53,9 +41,6 @@ CREATE TABLE IF NOT EXISTS `AgainForm`(
     `af_mat_id` INT UNSIGNED NOT NULL,
    PRIMARY KEY ( `af_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
 
 #  ------------------------------------------------------------------------------  原材料信息模块
 
@@ -86,7 +71,6 @@ CREATE TABLE IF NOT EXISTS `MaterialsSort`(
    PRIMARY KEY (`mat_sort_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 #  ------------------------------------------------------------------------------  库存记录
 
 /*
@@ -101,7 +85,6 @@ CREATE TABLE IF NOT EXISTS `Inventory`(
    PRIMARY KEY (`invt_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 /*
 入库物品信息
 编号 所属入库单号 备注 到货日期 所属物品
@@ -115,23 +98,18 @@ CREATE TABLE IF NOT EXISTS `GodownItems`(
    PRIMARY KEY (`gdit_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
 /*
-入库记录
-编号 入库单号 所属仓库 所属合同 库管员 单号日期 状态
+入库单
+编号 入库单号 所属仓库 库管员 单号日期
 */
 CREATE TABLE IF NOT EXISTS `GodownEntry`(
 	`gden_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	`gden_number` VARCHAR(12) NOT NULL,
 	`gden_whse_id` SMALLINT UNSIGNED NOT NULL,
-	`gden_con_id` MEDIUMINT UNSIGNED NOT NULL,
 	`gden_whse_keeper_id` SMALLINT UNSIGNED NOT NULL,
     `gden_in_date` DATE NOT NULL,
-    `gden_state` varchar(4) NOT NULL,
    PRIMARY KEY (`gden_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 /*
 仓库表
@@ -156,8 +134,6 @@ CREATE TABLE IF NOT EXISTS `GetRecordsNum`(
    PRIMARY KEY ( `getr_num_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
 /*
 领料单号 
 编号 出库单号 项目代码编号 领料仓库 领料人 库管员 类别 领料日期
@@ -174,9 +150,6 @@ CREATE TABLE IF NOT EXISTS `GetRecords`(
    PRIMARY KEY ( `getr_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-
 #  ------------------------------------------------------------------------------  产品模块
 
 /*
@@ -186,8 +159,8 @@ CREATE TABLE IF NOT EXISTS `GetRecords`(
 CREATE TABLE IF NOT EXISTS `ProdProject`(
 	`prod_proj_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	`prod_proj_number` VARCHAR(12) NOT NULL,
-    `prod_proj_begin_date` DATE,
-    `prod_proj_end_date` DATE,
+    `prod_proj_begin_date` DATE NOT NULL,
+    `prod_proj_end_date` DATE NOT NULL,
    PRIMARY KEY ( `prod_proj_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -226,15 +199,13 @@ CREATE TABLE IF NOT EXISTS `MaterialEqpt`(
    PRIMARY KEY ( `mat_eqpt_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
 /*
 原材料物品
 编号 原材料编码 数量 单价 状态 备注 所属订单
 */
 CREATE TABLE IF NOT EXISTS `Material`(
 	`mat_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`mat_number` VARCHAR(18) NOT NULL,
+	`mat_code_id` INT UNSIGNED NOT NULL,
     `mat_quantity` SMALLINT NOT NULL,
     `mat_price` FLOAT NOT NULL,
     `mat_state_id` TINYINT UNSIGNED NOT NULL,
@@ -250,12 +221,11 @@ CREATE TABLE IF NOT EXISTS `Material`(
 */
 CREATE TABLE IF NOT EXISTS `MaterialForm`(
 	`mat_form_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	`mat_form_supplier` VARCHAR(20) NOT NULL,
+	`mat_form_supplier_id` MEDIUMINT UNSIGNED NOT NULL,
     `mat_form_buy_date` DATE NOT NULL,
     `mat_form_proc_id` INT UNSIGNED NOT NULL,
    PRIMARY KEY ( `mat_form_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 
 /*
@@ -275,7 +245,6 @@ CREATE TABLE IF NOT EXISTS `LabConsumable`(
    PRIMARY KEY ( `lab_csb_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 /*
 实验室工具表
 编号 物品名称 规格型号 数量 单位 状态 供应商 单价 所属采购项目
@@ -293,26 +262,21 @@ CREATE TABLE IF NOT EXISTS `LabTool`(
    PRIMARY KEY ( `lab_tool_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 /*
 合同表
-编号 合同号 总金额 供应商 申购人 采购员 签订日期
+编号 合同号 总金额 供应商 签订日期 所属采购项目
 */
 CREATE TABLE IF NOT EXISTS `ContractForm`(
 	`con_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	`con_no` VARCHAR(20) NOT NULL,
 	`con_price` FlOAT(10,3) UNSIGNED NOT NULL,
     `con_supplier_id` MEDIUMINT UNSIGNED NOT NULL,
-	`con_requester_id` SMALLINT UNSIGNED NOT NULL,
-	`con_buyer` SMALLINT UNSIGNED NOT NULL,
 	`con_date` DATE NOT NULL,
+    `con_proc_id` INT UNSIGNED NOT NULL,
    PRIMARY KEY ( `con_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
 #  ------------------------------------------------------------------------------  其他信息
-
 
 /*
 人员表
@@ -327,13 +291,18 @@ CREATE TABLE IF NOT EXISTS `Staff`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
 /*------------------------------ 主外键约束 ----------------------------------------------*/
 
-/*采购项目   rv  资产所属*/
-ALTER TABLE ProcProject
-ADD FOREIGN KEY (proc_belongs_id)
-REFERENCES Belongs(belongs_id);
+/*原材料订单   rv  供应商*/
+ALTER TABLE MaterialForm
+ADD FOREIGN KEY (mat_form_supplier_id)
+REFERENCES Supplier(spl_id);
+
+
+/*原材料物品   rv  原材料编码*/
+ALTER TABLE Material
+ADD FOREIGN KEY (mat_code_id)
+REFERENCES MaterialsCode(mat_code_id);
 
 /*采购项目   rv  申请人*/
 ALTER TABLE ProcProject
@@ -363,11 +332,6 @@ REFERENCES Staff(staff_id);
 /*合同表   rv  人员表*/
 ALTER TABLE ContractForm
 ADD FOREIGN KEY (con_requester_id)
-REFERENCES Staff(staff_id);
-
-/*合同表   rv  人员表*/
-ALTER TABLE ContractForm
-ADD FOREIGN KEY (con_buyer)
 REFERENCES Staff(staff_id);
 
 /*合同表   rv  供应商*/
@@ -439,6 +403,11 @@ REFERENCES ItemState(item_state_id);
 /*耗材   rv  采购项目*/
 ALTER TABLE LabConsumable
 ADD FOREIGN KEY (lab_csb_proc_id)
+REFERENCES ProcProject(proc_id);
+
+/*合同表   rv  所属采购项目*/
+ALTER TABLE ContractForm
+ADD FOREIGN KEY (con_proc_id)
 REFERENCES ProcProject(proc_id);
 
 /*耗材   rv  状态*/
