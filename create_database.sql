@@ -329,11 +329,6 @@ ALTER TABLE ProcProject
 ADD FOREIGN KEY (proc_buyer)
 REFERENCES Staff(staff_id);
 
-/*合同表   rv  人员表*/
-ALTER TABLE ContractForm
-ADD FOREIGN KEY (con_requester_id)
-REFERENCES Staff(staff_id);
-
 /*合同表   rv  供应商*/
 ALTER TABLE ContractForm
 ADD FOREIGN KEY (con_supplier_id)
