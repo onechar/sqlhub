@@ -8,17 +8,29 @@ set names utf8;
 #  ------------------------------------------------------------------------------  采购模块
 /*
 采购项目
-编号 采购单号 立项时间 资产所属 申请人 采购员
+编号 采购单号 立项时间 完结时间 资产所属 申请人 采购员
 */
 CREATE TABLE IF NOT EXISTS `ProcProject`(
 	`proc_id` INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	`proc_number` VARCHAR(20) NOT NULL,
 	`proc_build_date` DATE NOT NULL,
     `proc_end_date` DATE NOT NULL,
+    `proc_belongs_id` TINYINT UNSIGNED NOT NULL,
 	`proc_requester_id` SMALLINT UNSIGNED NOT NULL,
 	`proc_buyer` SMALLINT UNSIGNED NOT NULL,
    PRIMARY KEY ( `proc_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*
+归属公司
+编号 名称
+*/
+CREATE TABLE IF NOT EXISTS `Belongs`(
+	`belongs_id` TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
+	`belongs_name` VARCHAR(5) NOT NULL,
+   PRIMARY KEY ( `belongs_id` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 /*
 供应商
@@ -297,6 +309,11 @@ CREATE TABLE IF NOT EXISTS `Staff`(
 ALTER TABLE MaterialForm
 ADD FOREIGN KEY (mat_form_supplier_id)
 REFERENCES Supplier(spl_id);
+
+/*原材料订单   rv  供应商*/
+ALTER TABLE ProcProject
+ADD FOREIGN KEY (proc_belongs_id)
+REFERENCES Belongs(belongs_id);
 
 
 /*原材料物品   rv  原材料编码*/
