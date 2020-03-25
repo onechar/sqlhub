@@ -65,14 +65,19 @@ INSERT INTO ProdProject(prod_proj_number,prod_proj_begin_date,prod_proj_end_date
                        ('TAIF191112','2018-09-23','1000-01-01'),
                        ('FGEQ191234','2017-09-23','1000-01-01'),
                        ('TYIF196781','2019-09-23','2019-05-26');
-	
-INSERT INTO ProcProject(proc_number,proc_build_date,proc_end_date,proc_requester_id,proc_buyer)
+
+INSERT INTO Belongs(belongs_name)
 						VALUES
-                        ('FAEIU00001','2018-11-25','2018-12-05','1','2'),
-                        ('FAER00002','2019-11-25','2018-12-05','1','2'),
-                        ('FATY00003','2019-11-25','1000-01-01','2','2'),
-                        ('ZXTE00004','2020-2-17','1000-01-01','2','2'),
-                        ('ZXKD00005','2020-3-12','2020-3-19','2','2');
+                        ('法拉第'),
+                        ('中心');
+	
+INSERT INTO ProcProject(proc_number,proc_build_date,proc_end_date,proc_belongs_id,proc_requester_id,proc_buyer)
+						VALUES
+                        ('FAEIU00001','2018-11-25','2018-12-05','1','1','2'),
+                        ('FAER00002','2019-11-25','2018-12-05','1','1','2'),
+                        ('FATY00003','2019-11-25','1000-01-01','2','2','2'),
+                        ('ZXTE00004','2020-2-17','1000-01-01','1','2','2'),
+                        ('ZXKD00005','2020-3-12','2020-3-19','2','2','2');
                         
 INSERT INTO ItemState(item_state_name)
 						VALUES
